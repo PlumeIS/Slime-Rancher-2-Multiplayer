@@ -8,6 +8,7 @@ using System;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GameServer;
 using UnityEngine;
 using static Il2Cpp.ActorVortexer;
 
@@ -43,6 +44,10 @@ namespace SR2MP
         //GameMode
         private bool _GameMode;
         private bool _GameModeCached;
+        
+        //PlayerList
+        private System.Collections.Generic.Dictionary<int, String> _PlayerList;
+        private System.Collections.Generic.Dictionary<int, String> _PlayerListCached;
 
         //Actors
         private Dictionary<long, IdentifiableModel> _Actors;
@@ -131,6 +136,11 @@ namespace SR2MP
             {
                 _GameMode = _SystemContext.SceneLoader.CurrentSceneGroup.IsGameplay;
             }
+        }
+
+        private void ReadPlayerList()
+        {
+            _PlayerList = Server.playerList;
         }
 
         private int identifiablesCountCached;

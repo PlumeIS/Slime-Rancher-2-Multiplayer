@@ -15,6 +15,7 @@ public class ClientHandle : MonoBehaviour
         MelonLogger.Msg($"Client: Message from server: {_msg}");
         Client.instance.myId = _myId;
         ClientSend.WelcomeReceived();
+        MelonLogger.Log(Client.instance.tcp.socket.Client.LocalEndPoint.ToString());
 
         Client.instance.udp.Connect(((IPEndPoint)Client.instance.tcp.socket.Client.LocalEndPoint).Port);
     }

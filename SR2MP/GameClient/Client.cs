@@ -43,8 +43,15 @@ public class Client : MonoBehaviour
     public void ConnectToServer()
     {
         InitializeClientData();
-        udp.endPoint = new IPEndPoint(IPAddress.Parse(instance.ip), instance.port);
+        udp.endPoint = new IPEndPoint(IPAddress.Parse(instance.ip), instance.port+1);
         tcp.Connect();
+    }
+
+    public static void Disconnect()
+    {
+        ClientSend.DisconnectReceived();
+        CustomLobby.ResetConnectionState();
+        Statics.PlayerList = new Dictionary<int, string>();
     }
 
     public class TCP
@@ -69,7 +76,14 @@ public class Client : MonoBehaviour
 
         private void ConnectCallback(IAsyncResult _result)
         {
-            socket.EndConnect(_result);
+            try
+            {
+                socket.EndConnect(_result);
+            }
+            catch (SocketException)
+            {
+                Disconnect();
+            }
 
             if (!socket.Connected)
             {
@@ -184,7 +198,7 @@ public class Client : MonoBehaviour
 
         public void Connect(int _localPort)
         {
-            socket = new UdpClient(_localPort);
+            socket = new UdpClient();
 
             socket.Connect(endPoint);
             socket.BeginReceive(ReceiveCallback, null);
@@ -267,6 +281,7 @@ public class Client : MonoBehaviour
             { (int)Packets.CameraAngle, HandleData.HandleCameraAngle },
             { (int)Packets.VacconeState, HandleData.HandleVacconeState },
             { (int)Packets.GameMode, HandleData.HandleGameModeSwitch },
+            { (int)Packets.PlayerList, HandleData.HandlePlayerList },
             { (int)Packets.Time, HandleData.HandleTime },
             { (int)Packets.SaveRequest, HandleData.SaveRequested },
             { (int)Packets.Save, HandleData.HandleSave },

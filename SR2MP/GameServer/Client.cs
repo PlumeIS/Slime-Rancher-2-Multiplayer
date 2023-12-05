@@ -4,6 +4,7 @@ using System.Text;
 using System.Net;
 using System.Net.Sockets;
 using MelonLoader;
+using SR2MP;
 
 namespace GameServer
 {
@@ -14,6 +15,8 @@ namespace GameServer
         public int id;
         public TCP tcp;
         public UDP udp;
+
+        public bool isConnected = false;
 
         public Client(int _clientId)
         {
@@ -48,8 +51,8 @@ namespace GameServer
                 receiveBuffer = new byte[dataBufferSize];
 
                 stream.BeginRead(receiveBuffer, 0, dataBufferSize, ReceiveCallback, null);
-
                 ServerSend.Welcome(id, "Welcome to the server!");
+                Server.clients[id].isConnected = true;
             }
 
             public void SendData(Packet _packet)
@@ -174,6 +177,19 @@ namespace GameServer
                     }
                 });
             }
+        }
+        
+        public void Disconnect()
+        {
+            try
+            {
+                tcp.socket.Close();
+            }
+            catch (SocketException)
+            { }
+            tcp = new TCP(id);
+            udp = new UDP(id);
+            isConnected = false;
         }
     }
 }

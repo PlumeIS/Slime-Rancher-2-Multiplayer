@@ -15,5 +15,10 @@ namespace SR2MP
         public static bool FriendInGame;
         public static bool JoinedTheGame;
         public static bool HandlePacket;
+        public static Dictionary<int, string> PlayerList = new Dictionary<int, string>();
+
+        public static string TCPState = "<color=red>No</color>";
+        public static string UDPState = "<color=red>No</color>";
+        public static string Message;
     }
 }

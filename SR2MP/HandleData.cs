@@ -60,6 +60,12 @@ namespace SR2MP
             Statics.FriendInGame = _packet.ReadBool();
         }
 
+        public static void HandlePlayerList(Packet _packet)
+        {
+            MelonLogger.Msg("Get a new playerList");
+            Statics.PlayerList[_packet.ReadInt()] = _packet.ReadString();
+        }
+
         public static void HandleTime(Packet _packet)
         {
             var time = _packet.ReadDouble();

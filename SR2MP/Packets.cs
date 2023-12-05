@@ -21,7 +21,10 @@ public enum Packets
     LandPlotReplace,
     Sleep,
     Currency,
-    Actors
+    Actors,
+    MaxPlayer,
+    PlayerList,
+    Disconnect
 }
 
 public class Packet : IDisposable

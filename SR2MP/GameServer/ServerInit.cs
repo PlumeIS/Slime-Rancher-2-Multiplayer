@@ -8,7 +8,7 @@ namespace GameServer
     {
         private static bool isRunning = false;
 
-        public static void Start()
+        public static void Start(int maxPlayer, int port)
         {
             //Console.Title = "Game Server";
             isRunning = true;
@@ -16,7 +16,7 @@ namespace GameServer
             Thread mainThread = new Thread(new ThreadStart(MainThread));
             mainThread.Start();
 
-            Server.Start(2, 26950);
+            Server.Start(maxPlayer, port);
         }
 
         private static void MainThread()

@@ -61,85 +61,120 @@ namespace SR2MP
         private void MainMenu()
         {
             #region SR2MP
-            GUI.Box(new Rect(10f, 10f, 160f, 300f), "<b>SR2MP</b>");
+            GUI.Box(new Rect(10f, 10f, 160f, 330f), "<b>SR2MP</b>");
             #endregion
 
-            #region Donators
-            GUI.Box(new Rect(175f, 10f, 300f, 300f), "<b>Donators</b>");
 
-            GUI.Label(new Rect(180f, 35f, 150f, 25f), "<b>Name</b>");
-            GUI.Label(new Rect(330f, 35f, 150f, 25f), "<b>Amount</b>");
-
-            for (int i = donatorsStartingPoint; i < (donatorsStartingPoint + 8); i++)
+            int nowPlayer = 0;
+            int maxPlayer = 0;
+            foreach (KeyValuePair<int,string> player in Statics.PlayerList)
             {
-                if (int.TryParse(donatorAmounts[i].Replace(" rubles", null), out int amount))
+                maxPlayer += 1;
+                if (player.Value != "NULL_PLAYER_NAME_FOR_WAITING")
                 {
-                    if ((amount >= 40000))
-                    {
-                        GUI.color = new Color(111f / 255f, 126f / 255f, 206f / 255f);
-                    }
-                    else if (amount >= 20000)
-                    {
-                        GUI.color = new Color(190f / 255f, 38f / 255f, 76f / 255f);
-                    }
-                    else if (amount >= 10000)
-                    {
-                        GUI.color = new Color(181f / 255f, 206f / 255f, 239f / 255f);
-                    }
-                    else if (amount >= 1000)
-                    {
-                        GUI.color = new Color(241f / 255f, 166f / 255f, 22f / 255f);
-                    }
-                    else if (amount >= 500)
-                    {
-                        GUI.color = new Color(203f / 255f, 205f / 255f, 211f / 255f);
-                    }
-                    else if (amount >= 300)
-                    {
-                        GUI.color = new Color(115f / 255f, 251f / 255f, 255f / 255f);
-                    }
-                    else if (amount >= 200)
-                    {
-                        GUI.color = new Color(82f / 255f, 71f / 255f, 194f / 255f);
-                    }
-                    else if (amount >= 100)
-                    {
-                        GUI.color = new Color(236f / 255f, 46f / 255f, 49f / 255f);
-                    }
-                    else
-                    {
-                        GUI.color = new Color(241f / 255f, 196f / 255f, 15f / 255f);
-                    }
+                    nowPlayer += 1;
                 }
-
-                GUI.Label(new Rect(180f, 65f + 30f * (i - donatorsStartingPoint), 150f, 25f), $"<b>{donatorNames[i]}</b>");
-                GUI.Label(new Rect(330f, 65f + 30f * (i - donatorsStartingPoint), 150f, 25f), $"<b>{donatorAmounts[i]}</b>");
+                
             }
-            GUI.color = Color.cyan;
+            
+            GUI.Box(new Rect(175f, 10f, 160f, 330f), $"<b>PlayerList ({nowPlayer}/{maxPlayer})</b>");
 
-            var newButton = new GUIStyle(GUI.skin.button);
-            newButton.padding.left = 8;
-            newButton.padding.top = 3;
-
-            if (donatorsStartingPoint > 0)
+            for (int i = 1; i < Statics.PlayerList.Count+1; i++)
             {
-                if (GUI.Button(new Rect(445f, 245f, 25f, 25f), "▲", newButton))
+                if (Statics.PlayerList[i] == "NULL_PLAYER_NAME_FOR_WAITING")
                 {
-                    donatorsStartingPoint -= 1;
+                    GUIStyle style = GUI.skin.label;
+                    Color oldColor = style.normal.textColor;
+                    style.normal.textColor = Color.grey;
+                    GUI.Label(new Rect(180f, 30f+ ((i - 1) * 20f), 150f, 35f), "Waiting join...", style);
+                    style.normal.textColor = oldColor;
+                }
+                else
+                {
+                    GUI.Label(new Rect(180f, 30f+ ((i - 1) * 20f), 150f, 35f), Statics.PlayerList[i]);
                 }
             }
-
-            if (donatorsStartingPoint < (donatorsCount - 8))
-            {
-                if (GUI.Button(new Rect(445f, 275f, 25f, 25f), "▼", newButton))
-                {
-                    donatorsStartingPoint += 1;
-                }
-            }
-            #endregion
+            
+            
+            // foreach (KeyValuePair<int,string> player in Statics.PlayerList)
+            // {
+            //     
+            // }
+            
+            //
+            // GUI.Label(new Rect(180f, 35f, 150f, 25f), "<b>Name</b>");
+            // GUI.Label(new Rect(330f, 35f, 150f, 25f), "<b>Amount</b>");
+            //
+            // for (int i = donatorsStartingPoint; i < (donatorsStartingPoint + 8); i++)
+            // {
+            //     if (int.TryParse(donatorAmounts[i].Replace(" rubles", null), out int amount))
+            //     {
+            //         if ((amount >= 40000))
+            //         {
+            //             GUI.color = new Color(111f / 255f, 126f / 255f, 206f / 255f);
+            //         }
+            //         else if (amount >= 20000)
+            //         {
+            //             GUI.color = new Color(190f / 255f, 38f / 255f, 76f / 255f);
+            //         }
+            //         else if (amount >= 10000)
+            //         {
+            //             GUI.color = new Color(181f / 255f, 206f / 255f, 239f / 255f);
+            //         }
+            //         else if (amount >= 1000)
+            //         {
+            //             GUI.color = new Color(241f / 255f, 166f / 255f, 22f / 255f);
+            //         }
+            //         else if (amount >= 500)
+            //         {
+            //             GUI.color = new Color(203f / 255f, 205f / 255f, 211f / 255f);
+            //         }
+            //         else if (amount >= 300)
+            //         {
+            //             GUI.color = new Color(115f / 255f, 251f / 255f, 255f / 255f);
+            //         }
+            //         else if (amount >= 200)
+            //         {
+            //             GUI.color = new Color(82f / 255f, 71f / 255f, 194f / 255f);
+            //         }
+            //         else if (amount >= 100)
+            //         {
+            //             GUI.color = new Color(236f / 255f, 46f / 255f, 49f / 255f);
+            //         }
+            //         else
+            //         {
+            //             GUI.color = new Color(241f / 255f, 196f / 255f, 15f / 255f);
+            //         }
+            //     }
+            //
+            // GUI.Label(new Rect(180f, 65f + 30f * (i - donatorsStartingPoint), 150f, 25f), $"<b>{donatorNames[i]}</b>");
+            // GUI.Label(new Rect(330f, 65f + 30f * (i - donatorsStartingPoint), 150f, 25f), $"<b>{donatorAmounts[i]}</b>");
+            // }
+            // GUI.color = Color.cyan;
+            //
+            // var newButton = new GUIStyle(GUI.skin.button);
+            // newButton.padding.left = 8;
+            // newButton.padding.top = 3;
+            //
+            // if (donatorsStartingPoint > 0)
+            // {
+            //     if (GUI.Button(new Rect(445f, 245f, 25f, 25f), "▲", newButton))
+            //     {
+            //         donatorsStartingPoint -= 1;
+            //     }
+            // }
+            //
+            // if (donatorsStartingPoint < (donatorsCount - 8))
+            // {
+            //     if (GUI.Button(new Rect(445f, 275f, 25f, 25f), "▼", newButton))
+            //     {
+            //         donatorsStartingPoint += 1;
+            //     }
+            // }
+            // #endregion
 
             #region Info
-            GUI.Box(new Rect(10f, 315f, 465f, 25f), "You can hide this menu by pressing the Tilde button (~, Ё, Ö)");
+            GUI.Box(new Rect(10f, 345f, 325f, 25f), "Use \"~\" to hide this UI");
             #endregion
         }
 
@@ -163,13 +198,13 @@ namespace SR2MP
 
         void Start()
         {
-            DownloadListOfDonators();
+            // DownloadListOfDonators();
 
-            if (!MultiplayerMain.Instance.SteamIsAvailable)
-            {
-                this.gameObject.AddComponent<CustomLobby>();
-                menuMode = "custom";
-            }
+            // if (!MultiplayerMain.Instance.SteamIsAvailable)
+            // {
+            //     this.gameObject.AddComponent<CustomLobby>();
+            //     menuMode = "custom";
+            // }
         }
 
         private void DownloadListOfDonators()
@@ -183,6 +218,12 @@ namespace SR2MP
                 donatorNames.Add(info[0]);
                 donatorAmounts.Add(info[1]);
             }
+            // donatorsCount = 8;
+            // for (int i = 0; i < 7; i++)
+            // {
+            //     donatorNames.Add("PlumeIS");
+            //     donatorAmounts.Add("114514");    
+            // }
         }
     }
 }

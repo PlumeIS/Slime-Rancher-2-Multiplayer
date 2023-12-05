@@ -76,6 +76,16 @@ namespace SR2MP
             }
         }
 
+        public static void SendPlayerList(int client, String username)
+        {
+            using (Packet _packet = new Packet((int)Packets.PlayerList))
+            {
+                _packet.Write(client);
+                _packet.Write(username);
+                Networking.SendTCPData(_packet);
+            }
+        }
+
         public static void SendTime(double time)
         {
             using (Packet _packet = new Packet((int)Packets.Time))

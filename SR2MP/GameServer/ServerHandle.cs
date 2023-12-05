@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using SR2MP;
 
 namespace GameServer
 {
@@ -13,11 +14,20 @@ namespace GameServer
             string _username = _packet.ReadString();
 
             MelonLogger.Msg($"{Server.clients[_fromClient].tcp.socket.Client.RemoteEndPoint} connected successfully and is now player {_fromClient}.");
+            Server.playerList[_fromClient] = _username;
             if (_fromClient != _clientIdCheck)
             {
                 MelonLogger.Msg($"Server: Player \"{_username}\" (ID: {_fromClient}) has assumed the wrong client ID ({_clientIdCheck})!");
             }
-            // TODO: send player into game
+            Server.sendPlayerListUpdate();
+        }
+
+        public static void DisconnectReceived(int _fromClient, Packet _packet)
+        {
+            Server.clients[_fromClient].Disconnect();
+            Server.playerList[_fromClient] = null;
+            MelonLogger.Msg($"Server: Received disconnect packet from ID: {_fromClient}.");
+            Server.sendPlayerListUpdate();
         }
 
         public static void UDPTestReceived(int _fromClient, Packet _packet)
