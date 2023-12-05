@@ -9,6 +9,7 @@ Better customization hosting settings comared to the original version.
 + show Port Setting
 + More hosting and connection info
 
+## Addition:
 + Add PlayList, MaxPlayer show
 + Add Disconnect feature
 + Add hidable DonatorsList (TODO and Testing)
