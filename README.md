@@ -8,6 +8,7 @@ Better customization hosting settings comared to the original version.
 + Show MaxPlayer Setting
 + show Port Setting
 + More hosting and connection info
++ Remove auto steam testing
 
 ## Addition:
 + Add PlayList, MaxPlayer show
