@@ -3,7 +3,7 @@
 **Languages: [简体中文](https://github.com/PlumeIS/Slime-Rancher-2-Multiplayer/blob/main/README_cn.md)**   
 **Supported Version: 3.0.0**  
 
-Better customization hosting settings comared to the original version.(Select `Other (EGS, MS)` when select platform.)    
+Better customization hosting settings comared to the original version. (Select `Other (EGS, MS)` when select platform.)    
 
 ## Changed:
 + Show MaxPlayer Setting
