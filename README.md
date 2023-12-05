@@ -1,6 +1,6 @@
 # Slime-Rancher-2-Multiplayer 
-
-**Language: [简体中文](https://github.com/PlumeIS/Slime-Rancher-2-Multiplayer/blob/main/README_cn.md)**  
+   
+**Language: [简体中文](https://github.com/PlumeIS/Slime-Rancher-2-Multiplayer/blob/main/README_cn.md)**   
 **Supported Version: 3.0.0**  
 
 Better customization hosting settings comared to the original version.  
