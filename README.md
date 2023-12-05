@@ -1,8 +1,15 @@
 # Slime-Rancher-2-Multiplayer
 
-Discord server: https://discord.gg/JY8zDTuaGW
+**Supported Version: 3.0.0**  
 
+Better customization hosting settings comared to the original version.  
 
-**Some technical and networking solutions are used from:**
-- Tutorial how to make multiplayer by Tom Weiland: https://www.youtube.com/playlist?list=PLXkn83W0QkfnqsK8I0RAz5AbUxfg3bOQ5
-- SRMP mod by SatyPardus: https://github.com/SatyPardus/srmp-public
+## Changed:
++ Show MaxPlayer Setting
++ show Port Setting
++ More hosting and connection info
+
++ Add PlayList, MaxPlayer show
++ Add Disconnect feature
++ Add hidable DonatorsList (TODO and Testing)
++ Split Tcp and Udp Port
